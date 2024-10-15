@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Grill Master - Editar Perfil</title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/profilee.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <hr class="separador">
+    <hr class="separador1">
+
+    {% load crispy_forms_tags %}
+    <div class="container" style="border-radius: .25rem;">
+        <div class="">
+            <div class="">
+                <h1 style="color: black; text-align: center;">EDITAR PERFIL</h1>
+                <form method="POST" enctype="multipart/form-data" id="profile-form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary" style="background-color: #F44A36; box-shadow: none; border-color: #F44A36;">Editar</button>
+                </form>
+                <hr class="separador1">
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function calcularEdad(fechaNacimiento) {
+            const hoy = new Date();
+            const partesFecha = fechaNacimiento.split('-');
+            const anio = parseInt(partesFecha[0], 10);
+            const mes = parseInt(partesFecha[1], 10) - 1;
+            const dia = parseInt(partesFecha[2], 10);
+            const nacimiento = new Date(anio, mes, dia);
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const m = hoy.getMonth() - nacimiento.getMonth();
+            if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+            return edad;
+        }
+
+        function validarEdad(event) {
+            const fechaNacField = document.querySelector("input[name='fecha_nac']");
+            const fechaNac = fechaNacField.value;
+            const edad = calcularEdad(fechaNac);
+
+            if (edad < 18) {
+                event.preventDefault();
+                alert("Debes ser mayor de 18 años para modificar tu perfil.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("profile-form");
+            const emailField = document.querySelector("input[type='email']");
+
+            form.addEventListener("submit", function(event) {
+                const emailValue = emailField.value;
+                const regexEmail = /^[^\s@]+@[^\s@]+\.(com|cl)$/;
+
+                if (!regexEmail.test(emailValue)) {
+                    event.preventDefault();
+                    alert("Por favor, ingrese un correo electrónico que termine en .com o .cl");
+                }
+
+                const fechaNacField = document.querySelector("input[name='fecha_nac']");
+                const fechaNacValue = fechaNacField.value;
+                const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
+
+                if (!regexFecha.test(fechaNacValue)) {
+                    event.preventDefault();
+                    alert("Por favor, ingrese la fecha en el formato YYYY-MM-DD.");
+                } else {
+                    validarEdad(event);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

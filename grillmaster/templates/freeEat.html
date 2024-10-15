@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Grill Master - Por tu compra te regalamos </title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static '/css/freeE.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+  {% include 'nav.html' %}
+
+  <hr class="separador">
+  <hr class="separador3">
+  
+    <div class="contenido">
+      <div class="container">
+        <div class="row>">
+            <h2>Platillos gratis que vendran junto a la compra de nuestras parrilladas</h2>
+        </div>
+        <div class="row">
+            <button type="button" class="boton" id="enviar">Ver platos</button>
+        </div>
+        <div class="row">
+            <table class="table" id="categorias">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+      <div class="regalo-info">
+        <p>Cabe recalcar que la cantidad de platos gratis dependera de la cantidad gastada en la compra de nuestos servicios.</p>
+      </div>
+    </div>
+
+    {% include 'footer.html' %}
+    
+    <script src="{% static 'js/freeEat.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Grill Master - Administrar datos </title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}"> 
+    <link rel="stylesheet" href="{% static '/css/manag.css' %}"> 
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <hr class="separador">
+    <hr class="separador1">
+
+    <h1 style="text-align: center; color: white;">ADMINISTRACIÓN DE DATOS DE LA WEB</h1>
+    
+    <button 
+    type="button" 
+    class="btn btn-primary" 
+    style="background-color: #F44A36 ; font-size: smaller; box-shadow: none; border-color: #F44A36"
+    ><a href="{{ 'product/manage' }}">Administrar Productos</a></button>
+
+    <button 
+    type="button" 
+    class="btn btn-primary" 
+    style="background-color: #F44A36 ; font-size: smaller; box-shadow: none; border-color: #F44A36"
+    ><a href="{{'list_orders'}}">Pedidos</a></button>
+    
+    <hr class="separador1">
+    
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

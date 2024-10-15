@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Grill Master - Administrar datos </title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static '/css/manag.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <hr class="separador">
+    <hr class="separador1">
+
+    <div id="main-content" class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Añadir Producto</h2>
+            <form method="POST" id="product-add-form" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.id.label }}
+                    </label>
+                    {{ form.id }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.name.label }}
+                    </label>
+                    {{ form.name }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.description.label }}
+                    </label>
+                    {{ form.description }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.price.label }}
+                    </label>
+                    {{ form.price }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.stock.label }}
+                    </label>
+                    {{ form.stock }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.categoria.label }}
+                    </label>
+                    {{ form.categoria }}
+                </div>
+                <div class="row">
+                    <label for="{{ form.field.name }}">
+                        {{ form.image.label }}
+                    </label>
+                    {{ form.image }}
+                </div>
+                <div class="row mt-5">
+                    <div class="col">
+                        <input type="submit" class="btn btn-primary" value="Añadir" style="font-size: 1rem; background-color: #F44A36; box-shadow: none; border-color: #F44A36;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    {% include 'footer.html' %}
+    <script>
+        $(function(){
+            $("#product-add-form").validate({
+                rules:{
+                    name: 'required',
+                    description: 'required',
+                    price: 'required',
+                    stock: 'required',
+                    categoria: 'required',
+                    image: 'required',
+                },
+                messages:{
+                    name: {
+                        required :'Ingrese un nombre...',
+                    },
+                    description: {
+                        required: 'Ingrese una descripcion...',
+                    },
+                    price: {
+                        required: 'Ingrese el precio...',
+                    },
+                    stock: {
+                        required: 'Ingrese el stock disponible...',
+                        min: 1,
+                    },
+                    categoria: {
+                        required: 'Seleccione una categoría...',
+                    },
+                    image: {
+                        required: 'Eliga una imagen para el producto...',
+                    },
+                }
+            })
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

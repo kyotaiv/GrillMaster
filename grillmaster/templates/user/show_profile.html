@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Grill Master - Perfil</title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/showprofile.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <hr class="separador">
+    <hr class="separador1">
+    
+    <div class="container">
+        <h1 style="color: black; text-align: center; ">PERFIL DE USUARIO</h1>
+        <hr class="separador1">
+
+        <p style="color: black; font-size: larger;"><strong>Nombre de usuario:</strong></p>
+
+        <p style="color: black; font-size: larger;">· {{ user.username | upper }}</p>
+
+        <p style="color: black; font-size: larger;"><strong>Correo:</strong></p>
+        
+        <p style="color: black; font-size: larger;">· {{ user.email | upper }}</p>
+        
+        {% if user.registro_cliente %}
+            <p style="color: black; font-size: larger;"><strong>Género:</strong></p>
+
+            <p style="color: black; font-size: larger;">· {{ user.registro_cliente.id_genero | upper }}</p>
+        
+            <p style="color: black; font-size: larger;"><strong>Fecha de nacimiento:</strong></p>
+
+            <p style="color: black; font-size: larger;">· {{ user.registro_cliente.fecha_nac | upper }}</p>
+        
+        {% else %}
+        
+            <p style="color: black; font-size: larger;">No se encontraron datos de perfil.</p>
+        
+            <hr class="separador1">
+        
+        {% endif %}
+        <a href="{% url 'profile' %}" class="btn btn-primary" style="background-color: #F44A36; box-shadow: none; border-color: #F44A36; font-size: 1rem;">Editar</a>
+
+    </div>
+    
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

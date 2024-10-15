@@ -1,0 +1,79 @@
+body{
+    font-family: 'Figtree';
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    position: relative;
+}
+
+/* FOOTER CONFIGURACION */
+footer{
+    background-color: #F44A36;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+
+footer p{
+    margin-top: 6px;
+    margin-bottom: 2px;
+}
+
+/* ICONOS */
+a, a:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: larger;
+}
+
+/* SEPARADORES */
+.separador{
+    border: 0;
+    height: 0.5px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.separador1{
+    border: 0;
+    height: 0.5px;
+    background-color: none;
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+  
+label {
+    display: block;
+    font-size: large;
+    color: black;
+}
+  
+input[type="submit"],
+button {
+    padding: 10px;
+    background-color: #FA6E51;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+input[type="submit"]:hover,
+button:hover {
+    background-color: #F44A36;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #FAB451;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

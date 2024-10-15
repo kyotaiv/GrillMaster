@@ -1,0 +1,8 @@
+.nav-link.active {
+    color: #FAB451;
+    font-weight: bold;
+}
+
+.navbar-nav .ml-auto {
+    margin-right: auto !important;
+}

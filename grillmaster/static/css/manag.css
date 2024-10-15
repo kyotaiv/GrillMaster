@@ -1,0 +1,46 @@
+body{
+    font-family: 'Figtree';
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    position: relative;
+    color: #fff;
+}
+
+/* FOOTER CONFIGURACION */
+footer{
+    background-color: #F44A36;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer p{
+    margin-top: 6px;
+    margin-bottom: 2px;
+}
+
+/* ICONOS */
+a, a:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: larger;
+}
+
+/* SEPARADORES */
+.separador{
+    border: 0;
+    height: 0.5px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.separador1{
+    border: 0;
+    height: 0.5px;
+    background-color: none;
+    margin: 20px 0;
+}

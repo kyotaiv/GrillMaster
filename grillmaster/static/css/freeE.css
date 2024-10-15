@@ -1,0 +1,64 @@
+body{
+    font-family: 'Figtree';
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    position: relative;
+}
+
+footer{
+    background-color: #F44A36;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+}
+footer p{
+    margin-top: 6px;
+    margin-bottom: 2px;
+}
+
+.separador,
+.separadorX{
+    border: 0;
+    height: 0.5px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.separador2,
+.separador3{
+    border: 0;
+    height: 0.5px;
+    background-color: none;
+    margin: 20px 0;
+}
+
+a, a:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: larger;
+}
+
+.container,
+.table{
+    color: white;
+}
+
+.boton{
+    background-color: #F44A36;
+    color: #fff;
+}
+
+.table{
+    background-color: #F44A36;
+}
+.regalo-info{
+    color: white;
+    font-size: medium;
+    text-align: center;
+}
+
+.contenido{
+    min-height: 100vh;
+}

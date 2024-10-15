@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Grill Master - Pedidos</title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/orderss.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+    <style>
+        .card-header {
+            cursor: pointer;
+        }
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #main-content {
+            flex: 1;
+            padding-bottom: 80px;
+        }
+
+        #footer {
+            flex-shrink: 0;
+            height:60px;
+            background-color: #F44A36;
+            color: white;
+            text-align: center;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <hr class="separador">
+    <hr class="separador1">
+    
+    <div id="main-content" class="container">
+        <div class="row mb-4">
+            <div class="col text-white">
+                <h1>PEDIDOS REALIZADOS</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if orders %}
+                <div id="accordion">
+                    {% for order in orders %}
+                    <div class="card" style="background-color: #F44A36; color: white;">
+                        <div class="card-header" data-toggle="collapse" data-target="#collapse-{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse-{{ forloop.counter }}">
+                            <div class="d-flex justify-content-between">
+                                <h3>Pedido #{{ order.id }}</h3>
+                                <h1 class="mb-0 ml-5">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </h1>
+                            </div>
+                        </div>
+
+                        <div id="collapse-{{ forloop.counter }}" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-image text-white">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for detail in order.detalles_orden.all %}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ detail.product_id.image.url }}" class="img-fluid img-thumbnail" style="max-width: 80px;" alt="{{ detail.product_id.description }}">
+                                            </td>
+                                            <td>{{ detail.product_id.name }} - {{ detail.product_id.description }}</td>
+                                            <td>${{ detail.product_id.price }}</td>
+                                            <td>{{ detail.amount }}</td>
+                                            <td>${{ detail.subtotal }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td></td>
+                                            <td>Costos de envío</td>
+                                            <td>${{ order.shipping }}</td>
+                                            <td>-</td>
+                                            <td>${{ order.shipping }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>IVA</td>
+                                            <td>${{ order.taxes }}</td>
+                                            <td>-</td>
+                                            <td>${{ order.taxes }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-end">
+                                    <p>Total: ${{ order.total }}</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="text-center">
+                                                <div>
+                                                    <img class="img-status" src="{% static 'img/order_status/1.png' %}" alt="">
+                                                </div>
+                                                <p class="text-center">Procesando servicios</p>
+                                            </div>
+                                            <div class="text-center">
+                                                <div>
+                                                    <img class="img-status" src="{% static 'img/order_status/2.png' %}" alt="">
+                                                </div>
+                                                <p class="text-center">Servicios confirmados y en espera del dia</p>
+                                            </div>
+                                            <div class="text-center">
+                                                <div>
+                                                    <img class="img-status" src="{% static 'img/order_status/0.png' %}" alt="">
+                                                </div>
+                                                <p class="text-center">Servicios recibidos</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="background-color: green;  width: {{ order.percent }}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No has realizado pedidos todavía. Cuando realices un pedido aparecerá aquí.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <hr class="separador1">
+    
+    {% include 'footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

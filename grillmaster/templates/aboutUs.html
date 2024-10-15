@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grill Master - Quienes somos</title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/about.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <hr class="separador1">
+    <hr class="separador">
+
+    <div class="contenido">
+        <div class="vision-info">
+            <center>
+                <h2>Nos vemos como el lugar ideal para disfrutar de parrilladas excepcionales.
+                    Buscamos ser reconocidos por la calidad de nuestros productosy el objetivo de este sitio web es mostrar un poco de
+                    el excelente servicio y la pasión por la parrilla, creando momentos inolvidables para nuestros clientes.</h2>
+            </center>
+        </div>
+        <div class="imagenes">
+            <div class="imagen-fila">
+                <div class="imagen-cuadrado">
+                    <img src="{% static '../static/img/aboutUs/calidad.jpg' %}" alt="Descripción de la imagen 1">
+                    <p>En nuestra empresa, nuestra mision es que nos comprometemos a ofrecer productos de la más alta calidad.
+                     Seleccionamos cuidadosamente cada ingrediente para garantizar sabores excepcionales en cada parrillada.</p>
+                </div>
+                <div class="imagen-cuadrado">
+                    <img src="{% static '../static/img/aboutUs/calidad2.jpg' %}" alt="Descripción de la imagen 2">
+                    <p>Con una trayectoria de éxito, nos hemos posicionado como líderes en parrilladas.
+                         Desde nuestros inicios, hemos crecido gracias a nuestra dedicación a la calidad y al servicio excepcional.</p>
+                </div>
+            </div>
+            <div class="imagen-fila">
+                <div class="imagen-cuadrado">
+                    <img src="{% static '../static/img/aboutUs/calidad3.jpg' %}" alt="Descripción de la imagen 3">
+                    <p>En nuestra empresa, nos enorgullecemos de ofrecer sabores auténticos y cortes de carne especiales.
+                        Seleccionamos cuidadosamente cada corte para garantizar la máxima calidad y sabor.</p>
+                </div>
+                <div class="imagen-cuadrado">
+                    <img src="{% static '../static/img/aboutUs/calidad4.jpg' %}" alt="Descripción de la imagen 4">
+                    <p>Organizamos eventos donde nuestros clientes pueden visitar nuestras vacas, las cuales son criadas de manera saludable y con cuidado.
+                         Queremos que conozcan de cerca el origen de nuestros productos.</p>
+                </div>
+            </div>
+            <div class="enlace-container">
+                <a href="https://www.youtube.com/watch?v=kosnLnEDe-g" target="_blank">Oscar meza y nuestros productos </a>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

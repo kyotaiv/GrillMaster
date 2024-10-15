@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Nuestros productos
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static '/css/productos.css' %}">
+    <div class="container text-white min-vh-100 p-5">
+        <div class="row mb-4">
+            <div>
+                <h3>Detalle de la compra</h3>
+                <h6>Fecha de emisión {{ date }}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr class="bg-danger text-white">
+                        <th class="border-danger" >Nombre de servicio</th>
+                        <th class="border-danger" >Cantidad</th>
+                        <th class="border-danger" >Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr class="text-white">
+                        <td class="border-dark">{{ product.product_id }}</td>
+                        <td class="border-dark">{{ product.amount }}</td>
+                        <td class="border-dark">${{ product.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="border-dark text-white">
+                        <td class="border-dark">Costos envío</td>
+                        <td class="border-dark">-</td>
+                        <td class="border-dark">${{ shipping }}</td>
+                    </tr>
+                    <tr class="border-dark text-white">
+                        <td class="border-dark">IVA</td>
+                        <td class="border-dark">-</td>
+                        <td class="border-dark">${{ taxes }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+                <h5>Total: ${{ total }} </h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}

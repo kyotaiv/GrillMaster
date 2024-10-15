@@ -1,0 +1,49 @@
+{% load static %}
+
+{% block title %} 
+Detalle de la compra
+{% endblock %}
+
+{% block content %}
+<div id="main-content" class="container">
+    <div class="row mb-4">
+        <div>
+            <h3>Detalle de la compra</h3>
+            <h6>Fecha {{ date }}</h6>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.product_id }}</td>
+                    <td>{{ product.amount }}</td>
+                    <td>${{ product.subtotal }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>Costos de envío</td>
+                    <td>-</td>
+                    <td>${{ shipping }}</td>
+                </tr>
+                <tr>
+                    <td>IVA</td>
+                    <td>-</td>
+                    <td>${{ taxes }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <h5>Total: ${{ total }} </h5>
+        </div>
+    </div>
+</div>
+{% endblock %}

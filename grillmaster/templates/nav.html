@@ -1,0 +1,104 @@
+{% load static %}
+<nav class="navbar navbar-expand-md bg-black text-white navbar-white">
+  <img
+    src="{% static 'img/grillmasterlogo/logoentero.png' %}"
+    alt="Logo Empresa"
+    width="80"/>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav mr-auto">
+      {% url 'index' as index_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == index_url %}active{% endif %}"
+          href="{{ index_url }}">INICIO</a>
+      </li>
+      {% url 'aboutUs' as about_us_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == about_us_url %}active{% endif %}"
+          href="{{ about_us_url }}">QUIENES SOMOS</a>
+      </li>
+      {% url 'products' as shop_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == shop_url %}active{% endif %}"
+          href="{{ shop_url }}">SERVICIOS</a>
+      </li>
+      {% url 'photoGallery' as photo_gallery_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == photo_gallery_url %}active{% endif %}"
+          href="{{ photo_gallery_url }}">GALERIA DE FOTOS</a>
+      </li>
+      {% url 'contact' as contact_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == contact_url %}active{% endif %}"
+          href="{{ contact_url }}">CONTACTANOS</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      {% if user.is_staff %} 
+      {% url 'management' as management_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == management_url %}active{% endif %}"
+          href="{{ management_url }}">ADMINISTRAR</a>
+      </li>
+      {% endif %} 
+      {% if user.is_authenticated %} 
+      <li class="nav-item mr-2">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            style="background-color: black; font-family: 'Figtree'"
+          >
+          {{ user.username | upper }}
+          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="dropdownMenuButton"
+            style="background-color: #f44a36">
+          {% url 'show_profile' as show_profile_url %}
+          <a class="dropdown-item" href="{{ show_profile_url }}" style="color: white">Perfil</a>
+          {% url 'orders' as orders_url %}
+          <a class="dropdown-item" href="{{ orders_url }}" style="color: white">Pedidos</a>
+          <a class="dropdown-item" href="#"
+            ><form
+              id="logout-form"
+              method="post"
+              action="{% url 'logout' %}"
+              style="color: white; font-size: medium; text-align: center">
+              {% csrf_token %}
+              <a class="nav-link" onclick="this.closest('form').submit();">Cerrar sesión</a>
+              </form>
+            </a>
+          </div>
+        </div>
+      </li>
+      {% else %} {% url 'login' as login_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == login_url %}active{% endif %}"
+          href="{{ login_url }}">INICIAR SESION</a>
+      </li>
+      {% url 'registrar' as registrar_url %}
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.path == registrar_url %}active{% endif %}"
+          href="{{ registrar_url }}">REGISTRARSE</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

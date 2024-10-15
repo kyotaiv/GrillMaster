@@ -1,0 +1,89 @@
+body{
+    font-family: 'Figtree';
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    position: relative;
+}
+
+/* INFORMACION */
+section{
+    color: white;
+    text-align: center;
+    font-size: medium;
+    width: 50%;
+}
+
+section1{
+    color:#fff;
+    text-align: center;
+    font-size: x-large;
+    width: 100%;
+}
+
+/* CARRUSEL */
+.carousel-control-prev, .carousel-control-next {
+    width: 15px;
+    height: 30px;
+    font-size: 1rem;
+}
+
+#carruselInBotones {
+    max-width: 500px;
+    margin: auto;
+}
+
+.carousel-item img {
+    max-height: 400px;
+    width: auto;
+    margin: auto;
+}
+
+/* SEPARADORES */
+.separador{
+    border: 0;
+    height: 0.5px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.separador1{
+    border: 0;
+    height: 0.5px;
+    background-color: none;
+    margin: 20px 0;
+}
+
+.separadorX{
+    border: 0;
+    height: 0.5px;
+    background-color: none;
+    margin: 5px 0;
+}
+
+
+
+/* FOOTER CONFIGURACION */
+footer{
+    background-color: #F44A36;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer p{
+    margin-top: 6px;
+    margin-bottom: 2px;
+}
+
+
+
+/* ICONOS */
+a, a:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: larger;
+}

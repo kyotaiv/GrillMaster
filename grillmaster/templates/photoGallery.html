@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grill Master - Galeria De Fotos </title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/gall.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <hr class="separador">
+
+    <div class="titulos1">
+        <h1> GALERIA </h1>
+        <h6> Todas las carnes estan certificadas como mejor bistec y mejor lomo del mundo. </h6>
+    </div>
+    <div class="container-img">
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb1.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb2.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb3.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb4.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb5.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb6.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+        <div class="box-img">
+            <a href="">
+                <figure>
+                    <img src="{% static '../static/img/gallery/bb6.jpg' %}" alt="img-galeria" class="img-fluid">
+                </figure>
+            </a>
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

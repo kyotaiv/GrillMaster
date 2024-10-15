@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Grill Master - Iniciar sesion </title>
+    <link href='https://fonts.googleapis.com/css?family=Figtree' rel='stylesheet'>
+    <link rel="icon" href="{% static '../static/img/grillmasterlogo/logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/login.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <hr class="separador">
+    <hr class="separador1">
+    
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <div class="">
+                        <h2>Ingresa tus credenciales</h2>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <p><a href="{% url 'password_reset' %}" style="color:black; font-size: medium;">¿Olvidaste tu contraseña?</a></p>
+                            <p>No tienes cuenta? <a href="{% url 'registrar' %}" style="color: #F44A36; font-size: medium;">Click aquí</a></p>
+                            <input type="submit" value="Ingresar" class="btn btn-success" style="float:right;">
+                            <hr class="separador1">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+    <script src="{% static 'js/validationLogin.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+py -m pip install bootstrap4
+py -m pip install django-crispy-forms==1.14.0
+py -m pip install pillow
+
+Admin: Usuario: Admin  Contraseña: 1234 | Correo personalizado: accgrillmaster@gmail.com | Contraseña: GrillMaster002D
+Cliente prueba: Usuario: AccGrillmasterUser1 | Contraseña: GrillMaster002D

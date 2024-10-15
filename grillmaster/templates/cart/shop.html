@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Nuestros productos
+{% endblock %}
+
+{% block css %}
+<style>
+    .product-card {
+        margin-bottom: 20px;
+    }
+
+    .product-card .card-body {
+        background-color: #FAB451;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: #F44A36;
+    }
+
+    .product-card .card-body h5 {
+        margin-top: 0;
+    }
+
+    .search-form {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static '/css/shopeee.css' %}">
+<div class="container">
+    {% if user.is_authenticated %}
+        <div class="mb-5 d-flex justify-content-end">
+            <a href="{% url 'shopping_cart_open' %}?page={{ page_obj.number }}" class="btn btn-danger" style="background-color: #F44A36; font-size: 1rem; box-shadow: none; border-color: #F44A36;">
+                <i class="fa fa-shopping-cart"></i>
+                <span> {{ shopping_cart_amount }} </span>
+            </a>
+        </div>
+    {% endif %}
+
+    <form action="{% url 'products' %}" method="GET" class="form-inline mb-4">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Buscar por nombre..." value="{{ request.GET.search }}">
+        <select name="category" class="form-control mr-2">
+            <option value="">Todas las categorías</option>
+            {% for category in categorias %}
+                <option value="{{ category.nombreCategoria }}" {% if request.GET.category == category.nombreCategoria %} selected {% endif %}>{{ category.nombreCategoria }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary" style="background-color: #F44A36; box-shadow:none; border-color: #F44A36;">Buscar</button>
+    </form>
+
+    <div class="contenido">
+        <div class="container">
+            <div class="row">
+                {% if page_obj %}
+                    {% for product in page_obj %}
+                    <div class="col-md-6 col-lg-4 product-card" style="color: black;">
+                        <div class="card" style="background-color: #FAB451;">
+                            {% if product.image %}
+                                <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="Producto">
+                            {% else %}
+                                <img class="card-img-top img-fluid" src="{% static 'img/noimage.png' %}" alt="Imagen no disponible">
+                            {% endif %}
+                            <div class="card-body">
+                                <span class="badge badge-danger mb-2">{{ product.categoria }}</span>
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <h3 class="card-price">${{ product.price }}</h3>
+                                <p>
+                                    Disponibilidad: 
+                                    {% if product.stock > 1 %}
+                                        <span class="text-success text-white">Quedan {{ product.stock }} unidades</span>
+                                    {% elif product.stock == 1 %}
+                                        <span class="text-success">Queda {{ product.stock }} unidad</span>
+                                    {% else %}
+                                        <span class="text-danger">No quedan unidades</span>
+                                    {% endif %}
+                                </p>
+                                {% if user.is_authenticated %} 
+                                    {% if product.stock > 0 %}
+                                    <a class="btn btn-danger add-product" href="{% url 'shopping_cart_add' product.id %}?page={{ page_obj.number }}" style="background-color: #F44A36; font-size: 1rem; box-shadow: none; border-color: #F44A36;">Añadir al carro</a>
+                                    {% else %}
+                                    <a class="btn btn-outline-secondary add-product disabled" href="#">Fuera de stock</a>
+                                    {% endif %}
+                                {% else %}
+                                <p>Se tiene que registrar para comprar esto</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr class="separador1">
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Lo sentimos... Aún no se han agregado productos.</p>
+                {% endif %}
+            </div>
+        </div>    
+    </div>
+
+    <div class="row my-5 justify-content-center">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-white bg-dark border-dark" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Anterior</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link text-secondary bg-dark border-dark">Anterior</span>
+                    </li>
+                {% endif %}
+                {% for page_number in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <span class="page-link bg-danger border-danger">{{ page_number }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link bg-dark border-dark" href="?page={{ page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-white bg-dark border-dark" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Siguiente</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link text-secondary bg-dark border-dark">Siguiente</span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% url 'freeEat' as freeEat_url %}
+<div class="regalo">
+    <p>Al comprar una de nuestras parrilladas te regalaremos unos platos únicos de nuestra cocina <a class="link" href="{{ freeEat_url }}">Click aquí para ver más</a></p>
+</div>
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h3 class="modal-title" id="exampleModalLabel" style="color: black;">
+                    Carro de compras
+                </h3>
+                <a href="{% url 'shopping_cart_close' %}?page={{ page_obj.number }}" class="close" aria-label="Close" style="font-size: 1rem;">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if request.session.shopping_cart.items %}
+                            {% for key, value in request.session.shopping_cart.items %} 
+                            <tr>
+                                <td>
+                                    <img src="{{ value.url }}" class="img-fluid img-thumbnail" style="max-width: 80px;" alt="{{ value.description }}">
+                                </td>
+                                <td>{{ value.name }} - {{ value.description }}</td>
+                                <td><span class="shoppingCartItemPrice">{{ value.price }}</span></td>
+                                <td>{{ value.amount }}</td>
+                                <td>{{ value.total }}</td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm remove-product" href="{% url 'shopping_cart_add' id=key %}?page={{ page_obj.number}}" style="font-size: 1rem;"><i class="fa fa-plus fa-sm"></i></a>
+                                    <a class="btn btn-primary btn-sm remove-product" href="{% url 'shopping_cart_substract' key %}" style="font-size: 1rem;"><i class="fa fa-minus fa-sm"></i></a>
+                                    <a class="btn btn-danger btn-sm remove-product" href="{% url 'shopping_cart_delete' key %}" style="font-size: 1rem;"><i class="fa fa-times fa-sm"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td>Costos de envío</td>
+                                <td>{{ shipping }}</td>
+                                <td>-</td>
+                                <td>{{ shipping }}</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table> 
+                <div class="d-flex justify-content-end">
+                    <h5 style="color: #F44A36;">Total: <span class="price text-success">
+                        $<span>{{ shopping_cart_total }}</span></span> (IVA incluido)
+                    </h5>
+                </div>
+            </div>
+            {% if request.session.shopping_cart.items %}
+            <div class="modal-footer d-flex justify-content-end">
+                <a href="{% url 'shopping_cart_clear' %}" class="btn btn-danger" style="font-size: 1rem;">Limpiar</a>
+                <a href="{% url 'create_order' %}" class="btn btn-success" style="font-size: 1rem;">Comprar</a>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% if request.session.cart_open %}
+<script>
+    $('#cartModal').modal('show');
+</script>
+{% endif %}
+{% endblock %}
+{% include 'footer.html' %}
